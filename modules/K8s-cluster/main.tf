@@ -1,4 +1,3 @@
-### Plugin Provider ###
 terraform {
   required_providers {
     proxmox   = {
@@ -8,7 +7,6 @@ terraform {
   }
 }
 
-### Provider ###
 provider "proxmox" {
   pm_api_url      = "https://192.168.1.200:8006/api2/json"
   pm_user         = "terraform-prov@pve"
@@ -16,7 +14,7 @@ provider "proxmox" {
   pm_tls_insecure = true
 }
 
-### Master01 ###
+## VM1
 resource "proxmox_vm_qemu" "master_k8s_01" {
   name         = "master01"
   target_node  = "proxmox"
@@ -51,7 +49,7 @@ resource "proxmox_vm_qemu" "master_k8s_01" {
   os_type      = "cloud-init"
 }
 
-### Worker01 ###
+##VM 2
 resource "proxmox_vm_qemu" "worker_k8s_01" {
   name         = "Worker01"
   target_node  = "proxmox"
@@ -64,7 +62,7 @@ resource "proxmox_vm_qemu" "worker_k8s_01" {
   cpu	       = "x86-64-v2-AES"
   scsihw  	   = "virtio-scsi-pci"
   agent        = 1
-# bootdisk	   = "scsi0"
+#  bootdisk	   = "scsi0"
 
   disks{
     scsi{
@@ -86,7 +84,7 @@ resource "proxmox_vm_qemu" "worker_k8s_01" {
   os_type      = "cloud-init"
 }
 
-### Worker02 ###
+##VM 3
 resource "proxmox_vm_qemu" "worker_k8s_02" {
   name         = "Worker02"
   target_node  = "proxmox"
