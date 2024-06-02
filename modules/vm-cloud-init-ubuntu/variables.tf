@@ -30,6 +30,3 @@ variable "vm_ip_v4" {
   description = "Specify IP V4"
 }
 
-variable "proxmox_password" {
-  description = "Proxmox API Password"
-}

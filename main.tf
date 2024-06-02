@@ -8,5 +8,4 @@ module "master_01" {
   cpu_cores   = "2"
   vm_hdd_size = "50"
   vm_ip_v4    = "192.168.1.210"
-  proxmox_password = "Aaa10735!!.."
 }
