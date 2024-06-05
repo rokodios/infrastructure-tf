@@ -1,5 +1,4 @@
-variable "vms" {
-  default = {
+ vms = {
     master01 = {
       name_host        = "master01"
       id_vm            = "301"
@@ -27,5 +26,4 @@ variable "vms" {
       vm_hdd_size      = "50"
       vm_ip_v4         = "192.168.1.212"
     }
-  }
 }

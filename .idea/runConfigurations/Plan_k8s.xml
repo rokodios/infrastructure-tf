@@ -8,7 +8,7 @@
       <map />
     </option>
     <option name="passParentEnvs" value="true" />
-    <option name="programParameters" value="plan -out=&quot;k8s-infra-iac&quot;" />
+    <option name="programParameters" value="plan -var-file=&quot;vms_values.tfvars&quot; -out=&quot;k8s-infra-iac&quot;" />
     <option name="projectPathOnTarget" />
     <option name="selectedOptions">
       <list />
