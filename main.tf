@@ -1,33 +1,28 @@
 ## Variables VMs Ubuntu ##
-module "master_01" {
- source      = "./modules/vm-cloud-init-ubuntu"
-  name_host   = "master01"
-  id_vm       = "301"
-  vm_ram      = "2048"
-  cpu_sockets = "1"
-  cpu_cores   = "2"
-  vm_hdd_size = "50"
-  vm_ip_v4    = "192.168.1.210"
+variable "vms" {
+ description = "Map of VMs to create"
+ type = map(object({
+  name_host        = string
+  id_vm            = string
+  vm_ram           = string
+  cpu_sockets      = string
+  cpu_cores        = string
+  vm_hdd_size      = string
+  vm_ip_v4         = string
+ }))
 }
 
-module "worker_01" {
+module "vms" {
  source      = "./modules/vm-cloud-init-ubuntu"
- name_host   = "worker01"
- id_vm       = "302"
- vm_ram      = "2048"
- cpu_sockets = "1"
- cpu_cores   = "2"
- vm_hdd_size = "50"
- vm_ip_v4    = "192.168.1.211"
+
+ for_each = var.vms
+
+  name_host   = each.value.name_host
+  id_vm       = each.value.id_vm
+  vm_ram      = each.value.vm_ram
+  cpu_sockets = each.value.cpu_sockets
+  cpu_cores   = each.value.cpu_cores
+  vm_hdd_size = each.value.vm_hdd_size
+  vm_ip_v4    = each.value.vm_ip_v4
 }
 
-module "worker_02" {
- source      = "./modules/vm-cloud-init-ubuntu"
- name_host   = "worker02"
- id_vm       = "303"
- vm_ram      = "2048"
- cpu_sockets = "1"
- cpu_cores   = "2"
- vm_hdd_size = "50"
- vm_ip_v4    = "192.168.1.212"
-}
