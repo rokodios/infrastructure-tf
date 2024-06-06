@@ -11,21 +11,20 @@ terraform {
 resource "proxmox_vm_qemu" "ci_vm" {
   for_each = var.vms_module
   ## VM details ##
-  name         = "${each.value.name_host}.devopso.lab"
-  target_node  = "proxmox"
+  name         = "${each.value.name_host}.${each.value.domain_host}"
+  target_node  = each.value.node_env
   vmid	       = each.value.id_vm
-  clone        = "template-ubuntu"
-  full_clone   = true
-  os_type      = "cloud-init"
-  agent        = 1
-  #boot = "order=scsi0;ide3"
+  clone        = each.value.template_clone
+  full_clone   = each.value.full_clone
+  os_type      = each.value.os_type
+  agent        = each.value.qemu_agent
 
 ## VM specs  ##
   memory       = each.value.vm_ram
   sockets      = each.value.cpu_sockets
   cores        = each.value.cpu_cores
-  cpu	       = "x86-64-v2-AES"
-  scsihw	   = "virtio-scsi-pci"
+  cpu	       = each.value.cpu_model
+  scsihw	   = each.value.scsi_hw
 
 ##  VM disks units config ##
   disks{
@@ -33,14 +32,14 @@ resource "proxmox_vm_qemu" "ci_vm" {
       scsi0{
         disk{
           size = each.value.vm_hdd_size
-          storage = "storage-vm"
+          storage = each.value.hhd_storage_pool
         }
       }
     }
     ide{
       ide3{
         cloudinit{
-          storage = "storage-vm"
+          storage = each.value.ci_storage_pool
         }
       }
     }
@@ -48,15 +47,15 @@ resource "proxmox_vm_qemu" "ci_vm" {
 
 ## VM network configure ##
   network {
-    model     = "virtio"
-    bridge	  = "vmbr0"
+    model     = each.value.nic_model
+    bridge	  = each.value.nic_bridge
   }
 
  ## VM init-cloud config ##
-  ciuser       = "atorres"
-  cipassword   = "Aaa10735!!.."
-  sshkeys      = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCpQIIY1NFWkh7JLp4bpmJIQy7nemcU+lulmTcseck0HIzTeDMo14khADGa2Oh+2oaxf+XLvKscRovAxPouF38Fq5gHESW4TYldUw9rq1ha6Ym7RWNbn5DEUkY3FU6UOfLmhqgOEsUWWDI0akGVHLlVkyPJsj6JGM/D9hvXieJcKaoVhxHeo6wdKgUnFpuQiCHpIyknTuzGkb4tNsudduMROzCge/7UroPyeSZoylHnd0EWeq3Hd2SZzw0oDPpYd1i1MccNLJwy1fsI/PMBcxoJhX8b1hTp8St3URnOeIY6lkO1cTUe2vsotYFiyArElwmx71tEeSTwb5N6HsrWwro9 atorres@devopso.org"
-  ipconfig0    = "ip=${each.value.vm_ip_v4}/24,gw=192.168.1.1"
-  nameserver   = "192.168.1.1 8.8.8.8"
-  skip_ipv6    = true
+  ciuser       = each.value.ci_user
+  cipassword   = each.value.ci_password
+  sshkeys      = each.value.ci_rsa_pub
+  ipconfig0    = "ip=${each.value.vm_ip_v4}/${each.value.subnet},gw=${each.value.gateway}"
+  nameserver   = each.value.nameservers
+  skip_ipv6    = each.value.skip_ipv6
 }
