@@ -30,9 +30,11 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
-      - name: Terraform Plan
-        run: terraform plan -input=false -out=tfplan
-
-      - name: Terraform Apply
-        if: github.event_name == 'push'
-        run: terraform apply -input=false tfplan
+       - name: Terraform Plan and Apply
+        env:
+          TF_INPUT: false
+        run: |
+          terraform plan -input=false || exit 1
+          if [ "${{ github.event_name }}" == "push" ]; then
+            terraform apply -auto-approve
+          fi
