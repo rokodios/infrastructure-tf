@@ -1,3 +1,14 @@
+## Sensitive variables ##
+variable "vm_pass_module" {
+  type = string
+  sensitive = true
+}
+variable "vm_usr_module" {
+  type = string
+  sensitive = true
+}
+
+## VMs Variables creation ##
 variable "vms_module" {
   description = "Map of VMs to create"
   type = map(object({
@@ -27,9 +38,7 @@ variable "vms_module" {
     gateway          = string
     nameservers      = string
     skip_ipv6        = bool
-    ## VM access user ##
-    ci_user          = string
-    ci_password      = string
+    ## VM access rsa & user ##
     ci_rsa_pub       = string
   }))
 }

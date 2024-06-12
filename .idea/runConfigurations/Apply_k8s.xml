@@ -8,7 +8,7 @@
       <map />
     </option>
     <option name="passParentEnvs" value="true" />
-    <option name="programParameters" value="apply k8s-infra-iac" />
+    <option name="programParameters" value="apply " />
     <option name="projectPathOnTarget" />
     <option name="selectedOptions">
       <list />
