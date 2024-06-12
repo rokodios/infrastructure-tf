@@ -98,7 +98,7 @@ penecaliente01 = {
       template_clone   = "template-ubuntu"
       full_clone       = true
       os_type          = "cloud-init"
-      qemu_agent       = 1master
+      qemu_agent       = 1
       ## VM HW Specs ##
       vm_ram           = 2048
       cpu_model        = "x86-64-v2-AES"
