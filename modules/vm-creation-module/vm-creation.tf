@@ -52,8 +52,8 @@ resource "proxmox_vm_qemu" "ci_vm" {
   }
 
  ## VM init-cloud config ##
-  ciuser       = each.value.ci_user
-  cipassword   = each.value.ci_password
+  ciuser       = var.vm_usr_module
+  cipassword   = var.vm_pass_module
   sshkeys      = each.value.ci_rsa_pub
   ipconfig0    = "ip=${each.value.vm_ip_v4}/${each.value.subnet},gw=${each.value.gateway}"
   nameserver   = each.value.nameservers

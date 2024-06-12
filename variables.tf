@@ -1,3 +1,29 @@
+## Sensitive variables ##
+variable "prx_pass" {
+  type = string
+  sensitive = true
+}
+
+variable "prx_usr" {
+  type = string
+  sensitive = true
+}
+
+variable "prx_ip" {
+  type = string
+  sensitive = true
+}
+
+variable "vm_pass" {
+  type = string
+  sensitive = true
+}
+variable "vm_usr" {
+  type = string
+  sensitive = true
+}
+
+## VMs Variables creation ##
 variable "vms" {
   description = "Map of VMs to create"
   type = map(object({
@@ -27,9 +53,7 @@ variable "vms" {
     gateway          = string
     nameservers      = string
     skip_ipv6        = bool
-    ## VM access user ##
-    ci_user          = string
-    ci_password      = string
+    ## VM access rsa & user ##
     ci_rsa_pub       = string
   }))
 }
