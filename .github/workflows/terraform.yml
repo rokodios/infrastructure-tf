@@ -19,6 +19,13 @@ jobs:
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.8.5 
+          
+      - name: Configure Terraform Cloud Token
+        env:
+          TERRAFORM_TOKEN_app_terraform_io: ${{ secrets.TERRAFORM_CLOUD_TOKEN }}
+        run: |
+          mkdir -p ~/.terraform.d
+          echo "{\"credentials\": {\"app.terraform.io\": {\"token\": \"$TERRAFORM_TOKEN_app_terraform_io\"}}}" > ~/.terraform.d/credentials.tfrc.json   
 
       - name: Terraform Init
         run: terraform init
