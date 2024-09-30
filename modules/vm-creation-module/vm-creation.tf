@@ -60,7 +60,5 @@ resource "proxmox_vm_qemu" "ci_vm" {
   skip_ipv6    = each.value.skip_ipv6
   
  ## Snippet load cloud init scripts ##
-  cicustom = {
-     user = "local:snippets/cloud-init-userdata.yml"
-  }
+  cicustom = "user=local:snippets/cloud-init-userdata.yml"
 }
