@@ -58,4 +58,12 @@ resource "proxmox_vm_qemu" "ci_vm" {
   ipconfig0    = "ip=${each.value.vm_ip_v4}/${each.value.subnet},gw=${each.value.gateway}"
   nameserver   = each.value.nameservers
   skip_ipv6    = each.value.skip_ipv6
+
+  user_data = <<-EOF
+   #cloud-config
+    package_update: true
+    package_upgrade: true
+    packages:
+     - qemu-guest-agent
+  EOF
 }
