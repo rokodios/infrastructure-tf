@@ -54,7 +54,6 @@ resource "proxmox_vm_qemu" "ci_vm" {
  ## VM init-cloud config ##
   ciuser       = var.vm_usr_module
   cipassword   = var.vm_pass_module
-  cihostname   = each.value.name_host
   sshkeys      = each.value.ci_rsa_pub
   ipconfig0    = "ip=${each.value.vm_ip_v4}/${each.value.subnet},gw=${each.value.gateway}"
   nameserver   = each.value.nameservers
@@ -62,4 +61,6 @@ resource "proxmox_vm_qemu" "ci_vm" {
   
  ## Snippet load cloud init scripts ##
   cicustom = "user=local:snippets/cloud-init-userdata.yml"
+
 }
+
