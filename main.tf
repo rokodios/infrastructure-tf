@@ -12,7 +12,7 @@ resource "proxmox_vm_qemu" "opnsense" {
      name         = "fw-core-01.devopso.lab"
      vmid         = 200
      target_node  = "proxmox"
-     clone        = "template-opnsense"
+     clone        = "template-opnsens"
      full_clone   = true
      agent        = 0
      disk {
