@@ -14,7 +14,8 @@ resource "proxmox_vm_qemu" "opnsense" {
      target_node  = "proxmox"
      clone        = "template-opnsens"
      full_clone   = true
-     agent        = 0
+     agent        = 0 
+     boot         = "order=scsi0;net0"
      scsihw	      = "virtio-scsi-pci"
 
    ## Disk SCSI ##
@@ -28,7 +29,5 @@ resource "proxmox_vm_qemu" "opnsense" {
           }
         }
       }
-      boot {
-       device = ["scsi0", "net0"]
-      }
+       
  }
