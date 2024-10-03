@@ -15,7 +15,7 @@ resource "proxmox_vm_qemu" "opnsense" {
      clone        = "template-opnsens"
      full_clone   = true
      agent        = 0
-     scsihw	      = virtio-scsi-pci
+     scsihw	      = "virtio-scsi-pci"
 
    ## Disk SCSI ##
       disks{
