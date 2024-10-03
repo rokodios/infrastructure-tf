@@ -28,4 +28,7 @@ resource "proxmox_vm_qemu" "opnsense" {
           }
         }
       }
+      boot {
+       device = ["scsi0", "net0"]
+      }
  }
