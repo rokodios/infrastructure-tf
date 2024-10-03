@@ -15,9 +15,16 @@ resource "proxmox_vm_qemu" "opnsense" {
      clone        = "template-opnsens"
      full_clone   = true
      agent        = 0
-     disk {
-       size    = "10G"
-       storage = "storage-vm"
-       slot    = "scsi0"
-     }
+     scsihw	      = virtio-scsi-pci
+
+   ## Disk SCSI ##
+      disks{
+        scsi{
+          scsi0{
+            disk{
+              size = "10G"
+              storage = "storage-vm"
+            }
+          }
+        }
  }
