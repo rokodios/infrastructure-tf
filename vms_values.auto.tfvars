@@ -89,4 +89,15 @@ infra-core-w02 = {
      ## VM access rsa & users ##
      ci_rsa_pub       = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCpQIIY1NFWkh7JLp4bpmJIQy7nemcU+lulmTcseck0HIzTeDMo14khADGa2Oh+2oaxf+XLvKscRovAxPouF38Fq5gHESW4TYldUw9rq1ha6Ym7RWNbn5DEUkY3FU6UOfLmhqgOEsUWWDI0akGVHLlVkyPJsj6JGM/D9hvXieJcKaoVhxHeo6wdKgUnFpuQiCHpIyknTuzGkb4tNsudduMROzCge/7UroPyeSZoylHnd0EWeq3Hd2SZzw0oDPpYd1i1MccNLJwy1fsI/PMBcxoJhX8b1hTp8St3URnOeIY6lkO1cTUe2vsotYFiyArElwmx71tEeSTwb5N6HsrWwro9 atorres@devopso.org"
    }
+fw-core-01 = {
+     ## VM config ##
+     name_host        = "fw-core-01"
+     domain_host      = "devopso.lab"
+     id_vm            = 200
+     node_env         = "proxmox"
+     template_clone   = "template-opnsense"
+     full_clone       = true
+     qemu_agent       = 0
+     hhd_storage_pool = "storage-vm"
+   }
 }
