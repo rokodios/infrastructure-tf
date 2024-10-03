@@ -7,18 +7,21 @@ module "vm_creation" {
 }
 
 ## OPNsense specific VM ##
-
 resource "proxmox_vm_qemu" "opnsense" {
      name         = "fw-core-01.devopso.lab"
      vmid         = 200
      target_node  = "proxmox"
-     clone        = "template-opnsens"
+     clone        = "template-opnsense"
      full_clone   = true
      agent        = 0 
-     boot         = "order=scsi0;net0"
+     boot         = "order=scsi1;scsi0;net0"
+     memory       = 2048
+     sockets      = 1
+     cores        = 1
+     cpu	         = "x86-64-v2-AES"
      scsihw	      = "virtio-scsi-pci"
 
-   ## Disk SCSI ##
+   ## Disks SCSI ##
       disks{
         scsi{
           scsi0{
@@ -27,7 +30,12 @@ resource "proxmox_vm_qemu" "opnsense" {
               storage = "storage-vm"
             }
           }
+           scsi1{
+            disk{
+              size = "3G"
+              storage = "storage-vm"
+            }
+          }
         }
-      }
-       
+      }  
  }
