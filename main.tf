@@ -16,7 +16,8 @@ resource "proxmox_vm_qemu" "opnsense" {
      full_clone   = true
      agent        = 0
      disk {
-       size = "10G"
+       size    = "10G"
        storage = "storage-vm"
+       slot    = "scsi0"
      }
  }
