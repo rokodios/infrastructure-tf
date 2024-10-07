@@ -40,7 +40,7 @@ resource "proxmox_vm_qemu" "opnsense" {
       }  
 
     ## Ignore Cloud init network configuration ##
-     ipconfig0 = "" 
+     ipconfig0 = "ip=192.168.1.2/24,gw=192.168.1.1" 
     ## Ignore after create this variable ##
     lifecycle {
        ignore_changes = [
