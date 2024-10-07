@@ -2,7 +2,7 @@ terraform {
   backend "remote" {
     organization = "devopso"
     workspaces {
-      name = "infrastructure-tf"
+      name       = "infrastructure-tf"
     }
   }
 }

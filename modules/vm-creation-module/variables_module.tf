@@ -1,10 +1,10 @@
 ## Sensitive variables ##
 variable "vm_pass_module" {
-  type = string
+  type      = string
   sensitive = true
 }
 variable "vm_usr_module" {
-  type = string
+  type      = string
   sensitive = true
 }
 

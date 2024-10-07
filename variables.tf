@@ -1,25 +1,25 @@
 ## Sensitive variables ##
 variable "prx_pass" {
-  type = string
+  type      = string
   sensitive = true
 }
 
 variable "prx_usr" {
-  type = string
+  type      = string
   sensitive = true
 }
 
 variable "prx_ip" {
-  type = string
+  type      = string
   sensitive = true
 }
 
 variable "vm_pass" {
-  type = string
+  type      = string
   sensitive = true
 }
 variable "vm_usr" {
-  type = string
+  type      = string
   sensitive = true
 }
 

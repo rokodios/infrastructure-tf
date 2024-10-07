@@ -23,15 +23,15 @@ resource "proxmox_vm_qemu" "ci_vm" {
   memory       = each.value.vm_ram
   sockets      = each.value.cpu_sockets
   cores        = each.value.cpu_cores
-  cpu	       = each.value.cpu_model
-  scsihw	   = each.value.scsi_hw
+  cpu	         = each.value.cpu_model
+  scsihw	     = each.value.scsi_hw
 
 ##  VM disks units config ##
   disks{
     scsi{
       scsi0{
         disk{
-          size = each.value.vm_hdd_size
+          size    = each.value.vm_hdd_size
           storage = each.value.hhd_storage_pool
         }
       }
@@ -47,8 +47,8 @@ resource "proxmox_vm_qemu" "ci_vm" {
 
 ## VM network configure ##
   network {
-    model     = each.value.nic_model
-    bridge	  = each.value.nic_bridge
+    model      = each.value.nic_model
+    bridge	   = each.value.nic_bridge
   }
 
  ## VM init-cloud config ##

@@ -18,7 +18,7 @@ resource "proxmox_vm_qemu" "opnsense" {
      memory       = 2048
      sockets      = 1
      cores        = 1
-     cpu	         = "x86-64-v2-AES"
+     cpu	        = "x86-64-v2-AES"
      scsihw	      = "virtio-scsi-pci"
 
    ## Disks SCSI ##
@@ -26,16 +26,22 @@ resource "proxmox_vm_qemu" "opnsense" {
         scsi{
           scsi0{
             disk{
-              size = "10G"
+              size    = "10G"
               storage = "storage-vm"
             }
           }
            scsi1{
             disk{
-              size = "3G"
+              size    = "3G"
               storage = "storage-vm"
             }
           }
         }
       }  
+    ## Ignore after create this variable ##
+    lifecycle {
+       ignore_changes = [
+         "boot" 
+       ]
+    }
  }
