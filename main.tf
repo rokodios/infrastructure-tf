@@ -45,7 +45,11 @@ resource "proxmox_vm_qemu" "opnsense" {
     lifecycle {
        ignore_changes = [
          boot,
-         ipconfig0
+         ipconfig0,
+         network,
+         tags,
+         name,
+         vmid
        ]
     }
  }
