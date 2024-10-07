@@ -44,7 +44,7 @@ resource "proxmox_vm_qemu" "opnsense" {
     ## Ignore after create this variable ##
     lifecycle {
        ignore_changes = [
-         boot
+         boot,
          ipconfig0
        ]
     }
