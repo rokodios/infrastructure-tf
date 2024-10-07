@@ -38,6 +38,9 @@ resource "proxmox_vm_qemu" "opnsense" {
           }
         }
       }  
+
+    ## Ignore Cloud init network configuration ##
+     ipconfig0 = "" 
     ## Ignore after create this variable ##
     lifecycle {
        ignore_changes = [
