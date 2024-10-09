@@ -40,7 +40,7 @@
      os_type          = "cloud-init"
      qemu_agent       = 1
      ## VM HW Specs ##
-     vm_ram           = 4096
+     vm_ram           = 8192
      cpu_model        = "x86-64-v2-AES"
      cpu_sockets      = 1
      cpu_cores        = 2
@@ -70,7 +70,7 @@ infra-core-w02 = {
      os_type          = "cloud-init"
      qemu_agent       = 1
      ## VM HW Specs ##
-     vm_ram           = 4096
+     vm_ram           = 8192
      cpu_model        = "x86-64-v2-AES"
      cpu_sockets      = 1
      cpu_cores        = 2
