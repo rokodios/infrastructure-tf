@@ -100,7 +100,7 @@ infra-core-w03 = {
      os_type          = "cloud-init"
      qemu_agent       = 1
      ## VM HW Specs ##
-     vm_ram           = 8192
+     vm_ram           = 15000
      cpu_model        = "x86-64-v2-AES"
      cpu_sockets      = 1
      cpu_cores        = 2
