@@ -1,0 +1,74 @@
+# .terrateam/config.yml
+
+access_control:
+  policies:
+    - tag_query: ""                     # para todos los stacks
+      plan: ["*"]                       # cualquiera puede PLANear
+      apply: ["team:infra"]            # solo el equipo infra puede APPLY
+
+apply_requirements:
+  create_pending_apply_check: true     # crea un status check pendiente
+  checks:
+    - tag_query: ""                    # para todos
+      approved:
+        enabled: true                  # requiere al menos 1 aprobación
+        any_of_count: 1
+
+cost_estimation:
+  enabled: true                        # activa estimación de coste en cada PR
+
+drift:
+  enabled: true                        # activa escaneo de drift post‑merge
+  on_drift:
+    post_issue: true                   # crea un issue en caso de drift
+    reconcile_mode: manual            # el drift no se corrige solo
+
+dirs:
+  staging:
+    tags: ["staging"]
+  production:
+    tags: ["production"]
+    environment: production           # GitHub Environment "production"
+
+workflows:
+  - tag_query: "staging"
+    plan:
+      - type: oidc
+        provider: aws
+      - type: init
+      - type: plan
+      - type: run
+        cmd: ["checkov", "-d", "."]
+    apply:
+      - type: oidc
+        provider: aws
+      - type: init
+      - type: apply
+
+  - tag_query: "production"
+    plan:
+      - type: oidc
+        provider: aws
+      - type: init
+      - type: plan
+      - type: run
+        cmd: ["checkov", "-d", "."]
+    apply:
+      - type: oidc
+        provider: aws
+      - type: init
+      - type: apply
+      - type: run
+        cmd: ["./scripts/post-apply.sh"]
+
+when_modified:
+  autoapply: false                     # no auto‑apply tras el merge, se aplica manual
+
+hooks:
+  all:
+    pre:
+      - type: run
+        cmd: ["echo", "🔄 Ejecutando Terraform via Terrateam..."]
+
+config_builder:
+  enabled: false                       # desactivado por defecto, activar solo si necesitas dinámico
